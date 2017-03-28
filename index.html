@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link rel="stylesheet" href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+    <md-card class="todo-body" ng-controller="TodosController as ctrl">
+        <md-card-header>
+            <md-card-avatar>
+                <img src="img/logo.svg" />
+            </md-card-avatar>
+            <md-card-header-text class="on-center">
+                <span class="md-title">Todo's list</span>
+                <span class="md-subhead">with angular</span>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-title>
+        </md-card-title>
+        <md-card-content>
+            <form name="new_todo">
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>New todo</label>
+                    <!--<md-icon md-svg-src="img/icons/plus.svg" ng-click="addTodo()" class="title"></md-icon>-->
+                    <input ng-model="title" type="text" ng-keyup="$event.keyCode == 13 && addTodo()" required>
+                </md-input-container>
+            </form>
+            <div class="on-center" ng-if="!ready">
+                <!--<img src="img/loading.gif" />-->
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <md-list flex ng-if="ready">
+                <md-list-item ng-repeat="item in todos">
+                    <div class="md-list-item-text" layout="column">
+                        <md-checkbox class="right" ng-model="item.completed"> </md-checkbox>
+                        <!--<md-tooltip md-direction="top">Criado em {{item.date}}</md-tooltip>-->
+                        <h3 class="md-secondary on-right" ng-class="{complete: item.completed}">{{ item.title }}<br/>
+                            <small class="todo-date on-right">criado em {{item.date}}</small></h3>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/todos-controller.js"></script>
+    <script src="js/todos-factory.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+</body>
+
+</html>
