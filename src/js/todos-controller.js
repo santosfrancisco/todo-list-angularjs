@@ -27,13 +27,16 @@ angular.module('app').controller('TodosController', function($scope, $mdToast, T
         TodosFactory.remove(id).then(getTodos);
     };
 
-    // $scope.isOpen = false;
-
-    // $scope.demo = {
-    //     isOpen: false,
-    //     count: 0,
-    //     selectedDirection: 'right'
-    // };
+    $scope.completeTodo = function(todo){
+        TodosFactory.change(todo).then(getTodos);
+    };
+     $scope.cleanCompleteds = function() {
+         console.log('dentro da func');
+        TodosFactory.removeCompleteds().then(function(todos) {
+            $scope.todos = todos;
+            $scope.ready = true;
+        });
+    };
 
     getTodos();
 });

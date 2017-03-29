@@ -124,5 +124,5 @@ gulp.task('watch', function () {
 });
 /* defualt */
 
-var all_tasks = ['connect',  'lint', 'css', 'less', 'js', 'vendor','html', 'img', 'watch'];
+var all_tasks = ['connect', 'clean', 'lint', 'css', 'less', 'js', 'vendor','html', 'img', 'watch'];
 gulp.task('default', all_tasks);
