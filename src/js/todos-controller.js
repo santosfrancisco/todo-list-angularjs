@@ -18,7 +18,8 @@ angular.module('app').controller('TodosController', function($scope, $mdToast, T
             todo.completed = false;
         } else {
             alert('Título obrigatório');
-        };
+        }
+
         $scope.title = '';
         TodosFactory.add(todo).then(getTodos);
     };
@@ -27,11 +28,10 @@ angular.module('app').controller('TodosController', function($scope, $mdToast, T
         TodosFactory.remove(id).then(getTodos);
     };
 
-    $scope.completeTodo = function(todo){
+    $scope.completeTodo = function(todo) {
         TodosFactory.change(todo).then(getTodos);
     };
-     $scope.cleanCompleteds = function() {
-         console.log('dentro da func');
+    $scope.cleanCompleteds = function() {
         TodosFactory.removeCompleteds().then(function(todos) {
             $scope.todos = todos;
             $scope.ready = true;
