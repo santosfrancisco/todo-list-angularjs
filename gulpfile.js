@@ -96,4 +96,4 @@ gulp.task('watch', function() {
 
 var start_tasks = ['connect', 'html', 'js', 'css', 'img', 'vendor', 'fonts', 'watch'];
 
-gulp.task('start', start_tasks);
+gulp.task('default', start_tasks);

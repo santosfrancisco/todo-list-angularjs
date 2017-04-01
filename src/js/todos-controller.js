@@ -1,12 +1,22 @@
 angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', function($scope, TodosFactory) {
     $scope.todos = [];
     $scope.ready = false;
+    $scope.showCompleteds = true;
 
-    var getTodos = function() {
-        TodosFactory.list().then(function(todos) {
-            $scope.todos = todos;
-            $scope.ready = true;
-        });
+    $scope.getTodos = function(showCompleteds) {
+        if ($scope.showCompleteds) {
+            TodosFactory.list().then(function(todos) {
+                $scope.todos = todos;
+                $scope.ready = true;
+
+            });
+        } else {
+            TodosFactory.hideCompleteds().then(function(todos) {
+                $scope.todos = todos;
+                $scope.ready = true;
+            });
+        }
+
     };
 
     $scope.addTodo = function addTodo() {
@@ -20,21 +30,22 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
             alert('Título obrigatório');
         };
 
+        $scope.todos.push(todo);
         $scope.title = '';
-        TodosFactory.add(todo).then(getTodos);
+        TodosFactory.add(todo).then($scope.getTodos);
     };
 
     $scope.removeTodo = function(id) {
-        TodosFactory.remove(id).then(getTodos);
+        TodosFactory.remove(id).then($scope.getTodos);
     };
 
     $scope.completeTodo = function(todo) {
-        TodosFactory.change(todo).then(getTodos);
+        TodosFactory.change(todo).then($scope.getTodos);
     };
 
-    $scope.cleanCompleteds = function() {
-        TodosFactory.removeCompleteds().then(getTodos);
+    $scope.removeCompleteds = function() {
+        TodosFactory.removeCompleteds().then($scope.getTodos);
     };
 
-    getTodos();
+    $scope.getTodos($scope.showCompleteds);
 }]);
