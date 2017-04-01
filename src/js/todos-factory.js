@@ -1,4 +1,4 @@
-angular.module('app').factory('TodosFactory', function($q, $http) {
+angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http) {
     return {
         list: function() {
             var promessa = $q.defer();
@@ -51,4 +51,4 @@ angular.module('app').factory('TodosFactory', function($q, $http) {
             return promessa.promise;
         }
     };
-});
+}]);

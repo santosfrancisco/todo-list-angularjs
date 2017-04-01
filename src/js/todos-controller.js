@@ -1,4 +1,4 @@
-angular.module('app').controller('TodosController', function($scope, $mdToast, TodosFactory) {
+angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', function($scope, TodosFactory) {
     $scope.todos = [];
     $scope.ready = false;
 
@@ -18,7 +18,7 @@ angular.module('app').controller('TodosController', function($scope, $mdToast, T
             todo.completed = false;
         } else {
             alert('Título obrigatório');
-        }
+        };
 
         $scope.title = '';
         TodosFactory.add(todo).then(getTodos);
@@ -31,12 +31,10 @@ angular.module('app').controller('TodosController', function($scope, $mdToast, T
     $scope.completeTodo = function(todo) {
         TodosFactory.change(todo).then(getTodos);
     };
+
     $scope.cleanCompleteds = function() {
-        TodosFactory.removeCompleteds().then(function(todos) {
-            $scope.todos = todos;
-            $scope.ready = true;
-        });
+        TodosFactory.removeCompleteds().then(getTodos);
     };
 
     getTodos();
-});
+}]);

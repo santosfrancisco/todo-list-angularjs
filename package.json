@@ -21,7 +21,9 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
-    "gulp-uglify": "^2.1.2"
+    "gulp-uglify": "^2.1.2",
+    "gulp-uglifycss": "^1.0.8",
+    "gulp-watch": "^4.3.11"
   },
   "dependencies": {
     "angular": "^1.6.4",

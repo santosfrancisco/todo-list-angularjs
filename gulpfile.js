@@ -3,7 +3,8 @@ var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
-
+var uglifycss = require('gulp-uglifycss');
+var watch = require('gulp-watch');
 var path = {
     HTML: [
         'src/*.html',
@@ -17,7 +18,7 @@ var path = {
     ],
     CSS: [
         'src/css/*.css',
-        'node_modules/font-awesome/css/*.css',
+        'node_modules/font-awesome/css/font-awesome.css',
         'node_modules/angular-material/angular-material.css'
 
     ],
@@ -31,9 +32,10 @@ var path = {
     VENDOR: [
         'node_modules/angular/angular.js',
         'node_modules/angular-animate/angular-animate.js',
-        'node_modules/angular-aria/angular-aria.js',
         'node_modules/angular-material/angular-material.js',
-        'node_modules/angular-messages/angular-messages.js'
+        'node_modules/angular-aria/angular-aria.js',
+        'node_modules/angular-messages/angular-messages.js',
+        // ...and more
     ],
     DIST: './dist'
 };
@@ -53,11 +55,13 @@ gulp.task('html', function() {
 gulp.task('js', function() {
     gulp.src(path.JS)
         .pipe(concat('app.js'))
+        .pipe(uglify())
         .pipe(gulp.dest(path.DIST + '/js'));
 });
 
 gulp.task('css', function() {
     gulp.src(path.CSS)
+        .pipe(uglifycss())
         .pipe(gulp.dest(path.DIST + '/css'));
 });
 
@@ -90,6 +94,6 @@ gulp.task('watch', function() {
     gulp.watch(path.IMG, ['img']);
 })
 
-var generate = ['connect', 'html', 'js', 'css', 'img', 'vendor', 'fonts', 'watch'];
+var start_tasks = ['connect', 'html', 'js', 'css', 'img', 'vendor', 'fonts', 'watch'];
 
-gulp.task('run', generate);
+gulp.task('start', start_tasks);
