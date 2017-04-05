@@ -35,12 +35,14 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
         TodosFactory.add(todo).then($scope.getTodos);
     };
 
-    $scope.removeTodo = function(id) {
-        TodosFactory.remove(id).then($scope.getTodos);
+    $scope.removeTodo = function(todo) {
+        TodosFactory.remove(todo.id);
+        var idx = $scope.todos.indexOf(todo);
+        $scope.todos.splice(idx, 1);
     };
 
     $scope.completeTodo = function(todo) {
-        TodosFactory.change(todo).then($scope.getTodos);
+        TodosFactory.change(todo);
     };
 
     $scope.removeCompleteds = function() {

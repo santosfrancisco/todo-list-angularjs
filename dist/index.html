@@ -42,11 +42,14 @@
                 <md-list-item ng-repeat="todo in todos">
                     <md-checkbox class="right" ng-model="todo.completed" ng-click="completeTodo(todo)"> </md-checkbox>
                     <p class="on-right" ng-class="{complete: todo.completed}">{{todo.title}}<br/><small class="todo-date"><em>criado em {{todo.date}}</em></small></p>
+                    <md-button class="md-fab md-mini" ng-click="removeTodo(todo)" aria-label="Remove todo">
+                        <i class="fa fa-close"></i>
+                    </md-button>
                 </md-list-item>
 
             </md-list>
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="removeCompleteds()">Limpar concluídas</md-button>
+                <md-button class="md-raised md-primary" ng-click="removeCompleteds()"><i class="fa fa-trash"></i> Limpar concluídas</md-button>
             </div>
         </md-card-content>
     </md-card>
