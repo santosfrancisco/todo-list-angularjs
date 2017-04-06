@@ -10,7 +10,7 @@ var path = {
         'src/*.html',
         'src/views/**/*.html',
         'src/views/*.html',
-        'src/favicon.png'
+        'src/favicon.ico'
     ],
     JS: [
         'src/js/*.js',

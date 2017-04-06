@@ -1,6 +1,6 @@
 angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http) {
     return {
-        list: function() {
+        list: function(showCompleteds) {
             var promessa = $q.defer();
 
             $http.get('https://todo-list-78110.firebaseio.com/todos.json')
@@ -8,7 +8,14 @@ angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http
                     var todos = [];
                     angular.forEach(result.data, function(todo, id) {
                         todo.id = id;
-                        todos.push(todo);
+                        var completed = todo.completed;
+                        if (showCompleteds) {
+                            todos.push(todo);
+                        } else {
+                            if (!completed) {
+                                todos.push(todo);
+                            }
+                        }
                     });
                     promessa.resolve(todos);
                 });

@@ -1,27 +1,18 @@
 angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', function($scope, TodosFactory) {
     $scope.todos = [];
     $scope.ready = false;
-    $scope.showCompleteds = true;
+    $scope.showCompleteds = false;
 
-    $scope.getTodos = function(showCompleteds) {
-        if ($scope.showCompleteds) {
-            TodosFactory.list().then(function(todos) {
-                $scope.todos = todos;
-                $scope.ready = true;
-
-            });
-        } else {
-            TodosFactory.hideCompleteds().then(function(todos) {
-                $scope.todos = todos;
-                $scope.ready = true;
-            });
-        }
-
+    var getTodos = function getTodos() {
+        TodosFactory.list($scope.showCompleteds).then(function(todos) {
+            $scope.todos = todos;
+            $scope.ready = true;
+        });
     };
 
     $scope.addTodo = function addTodo() {
         var todo = {};
-        if ($scope.new_todo.$valid) {
+        if ($scope.title) {
             todo.id = Date.now() + '';
             todo.title = $scope.title;
             todo.date = new Date().toLocaleDateString('en-GB');
@@ -32,7 +23,9 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
 
         $scope.todos.push(todo);
         $scope.title = '';
-        TodosFactory.add(todo).then($scope.getTodos);
+        TodosFactory.add(todo).then(getTodos);
+        $scope.new_todo.$setPristine();
+        $scope.new_todo.$setUntouched();
     };
 
     $scope.removeTodo = function(todo) {
@@ -42,12 +35,15 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
     };
 
     $scope.completeTodo = function(todo) {
-        TodosFactory.change(todo);
+        TodosFactory.change(todo).then(
+            getTodos);
     };
 
     $scope.removeCompleteds = function() {
-        TodosFactory.removeCompleteds().then($scope.getTodos);
+        TodosFactory.removeCompleteds().then(getTodos);
     };
-
-    $scope.getTodos($scope.showCompleteds);
+    $scope.listCompleteds = function() {
+        getTodos();
+    }
+    getTodos();
 }]);
