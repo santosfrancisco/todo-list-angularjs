@@ -10,6 +10,7 @@ var path = {
         'src/*.html',
         'src/views/**/*.html',
         'src/views/*.html',
+        'src/common/**/*.html',
         'src/favicon.ico'
     ],
     JS: [
@@ -92,6 +93,7 @@ gulp.task('watch', function() {
     gulp.watch(path.JS, ['js']);
     gulp.watch(path.HTML, ['html']);
     gulp.watch(path.IMG, ['img']);
+    gulp.watch(path.CSS, ['css']);
 })
 
 var start_tasks = ['connect', 'html', 'js', 'css', 'img', 'vendor', 'fonts', 'watch'];

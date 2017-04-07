@@ -1,7 +1,7 @@
 angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', function($scope, TodosFactory) {
     $scope.todos = [];
     $scope.ready = false;
-    $scope.showCompleteds = false;
+    $scope.showCompleteds = true;
 
     var getTodos = function getTodos() {
         TodosFactory.list($scope.showCompleteds).then(function(todos) {

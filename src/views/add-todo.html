@@ -1,0 +1,12 @@
+<form name="new_todo" class="css-form" novalidate>
+    <div layout="row" flex>
+        <md-button class="md-fab md-mini md-primary" aria-label="add new todo" ng-click="addTodo()">
+            <md-icon md-svg-src="img/add.svg"></md-icon>
+        </md-button>
+        <md-input-container flex layout="row" class="md-icon-float md-block">
+            <!-- Use floating label instead of placeholder -->
+            <label>New todo</label>
+            <input ng-model="title" type="text" ng-keyup="$event.keyCode == 13 ? addTodo() : null">
+        </md-input-container>
+    </div>
+</form>

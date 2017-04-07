@@ -15,45 +15,23 @@
     <md-card class="todo-body" ng-controller="TodosController as ctrl" ng-cloak="">
         <md-card-content>
             <div class="on-center">
-                <img src="img/todo-logo.png" />
+                <img class="header" src="img/todo-logo.png" />
             </div>
             <div>
                 <md-switch ng-model="showCompleteds" ng-change="listCompleteds()" aria-label="">Show completeds?</md-switch>
             </div>
-            <form name="new_todo" class="css-form" novalidate>
-                <div layout="row" flex>
-                    <md-button class="md-fab md-primary" aria-label="add new todo" ng-click="addTodo()">
-                        <md-icon md-svg-src="img/add.svg"></md-icon>
-                    </md-button>
-                    <md-input-container flex layout="row" class="md-icon-float md-block">
-                        <!-- Use floating label instead of placeholder -->
-                        <label>New todo</label>
-                        <input ng-model="title" type="text" ng-keyup="$event.keyCode == 13 ? addTodo() : null">
-                    </md-input-container>
-                </div>
-            </form>
 
-
-            <div class="on-center" ng-if="!ready">
-                <!--<img src="img/loading.gif" />-->
-                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            </div>
-            <md-list class="md-dense" flex ng-if="ready">
-                <md-list-item ng-repeat="todo in todos track by todo.id">
-                    <md-checkbox class="right" ng-model="todo.completed" ng-click="completeTodo(todo)"> </md-checkbox>
-                    <p class="on-right" ng-class="{complete: todo.completed}">{{todo.title}}<br/><small class="todo-date"><em>criado em {{todo.date}}</em></small></p>
-                    <md-button class="md-fab md-mini" ng-click="removeTodo(todo)" aria-label="Remove todo">
-                        <i class="fa fa-close"></i>
-                    </md-button>
-                </md-list-item>
-
-            </md-list>
+            <add-todo-form></add-todo-form>
+            <loading ng-if="!ready"></loading>
+            <list-todos ng-if="ready"></list-todos>
             <div layout="row" layout-align="end center">
                 <md-button class="md-raised md-primary" ng-click="removeCompleteds()"><i class="fa fa-trash"></i> Remove completeds</md-button>
             </div>
+
         </md-card-content>
     </md-card>
-    <div class="on-center">
+    <div class="on-center" layout="column">
+        <span><i class="fa fa-2x fa-github"></i></span>
         <span class="love"><i class="fa fa-code" aria-hidden="true"></i> with <i class="fa fa-heart red" aria-hidden="true"></i> by <a href="http://github.com/yoshidf" target="_blank">Francisco</a></span>
     </div>
 

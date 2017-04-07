@@ -16,7 +16,7 @@
     text-decoration: line-through;
 }
 
-md-card-header>img {
+img.header {
     max-width: 100%;
 }
 
