@@ -6,4 +6,4 @@ Hosted on [Firebase](https://firebase.google.com/)
 
 ## Preview
 
-![Preview Todo list](img/todo-preview.png)
+![Preview Todo list](src/img/todo-preview.png)
