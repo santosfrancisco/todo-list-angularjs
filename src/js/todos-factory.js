@@ -31,9 +31,8 @@ angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http
             return $http.put(myApi + '/todos/' + id + '.json', todo);
         },
         change: function(todo) {
-            var id = todo.id,
-                completed = !todo.completed;
-
+            var id = todo.id;
+            completed = !todo.completed;
             return $http.put(myApi + '/todos/' + id + '/completed.json', completed);
         },
         remove: function(id) {

@@ -1,12 +1,12 @@
-<form name="new_todo" class="css-form" novalidate>
+<form name="new_todo" class="css-form" validate>
     <div layout="row" flex>
-        <md-button class="md-fab md-mini md-primary" aria-label="add new todo" ng-click="addTodo()">
+        <md-button class="md-fab md-mini md-primary" aria-label="add new todo" ng-click="addTodo()" ng-disabled="new_todo.$invalid">
             <md-icon md-svg-src="img/add.svg"></md-icon>
         </md-button>
         <md-input-container flex layout="row" class="md-icon-float md-block">
             <!-- Use floating label instead of placeholder -->
-            <label>New todo</label>
-            <input ng-model="title" type="text" ng-keyup="$event.keyCode == 13 ? addTodo() : null">
+            <label>What do you need to do?</label>
+            <input name="title" ng-model="title" ng-maxlength="200" ng-minlength="1" md-maxlength="200" type="text" ng-keyup="$event.keyCode == 13 ? addTodo() : null" required>
         </md-input-container>
     </div>
 </form>

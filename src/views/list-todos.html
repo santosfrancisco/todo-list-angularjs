@@ -2,9 +2,10 @@
     <md-list-item ng-repeat="todo in todos track by todo.id">
         <md-checkbox class="right" ng-model="todo.completed" ng-click="completeTodo(todo)"> </md-checkbox>
         <p class="on-right" ng-class="{complete: todo.completed}">{{todo.title}}<br/><small class="todo-date"><em>criado em {{todo.date}}</em></small></p>
-        <md-button class="md-fab md-mini" ng-click="removeTodo(todo)" aria-label="Remove todo">
+        <!--<md-button class="md-fab md-mini" ng-click="removeTodo(todo)" aria-label="Remove todo">
             <i class="fa fa-close"></i>
-        </md-button>
+        </md-button>-->
+        <a ng-click="removeTodo(todo)" layout-padding="2"><i class="fa fa-close red"></i></a>
     </md-list-item>
 
 </md-list>

@@ -1,0 +1,60 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/node /usr/bin/firebase login --reauth
+[debug] CLI Version:  3.6.0
+[debug] Platform:     linux
+[debug] Node Version: v6.10.0
+[debug] Time:         Sat Apr 08 2017 01:28:27 GMT-0300 (-03)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on any device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=503429324&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/node /usr/bin/firebase deploy
+[debug] CLI Version:  3.6.0
+[debug] Platform:     linux
+[debug] Node Version: v6.10.0
+[debug] Time:         Sat Apr 08 2017 01:30:07 GMT-0300 (-03)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/Klfo5iJvfissGN8YPwF3toxP8YkXQh8P5hy5EbJQ8ng',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat Apr 08 2017 01:30:07 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/todo-list-78110  
+ Sat Apr 08 2017 01:30:08 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/todo-list-78110/tokens  
+ Sat Apr 08 2017 01:30:09 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'todo-list-78110'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing dist directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/todo-list-78110/uploads/-KhAotx6S1METzfS45LH?fileCount=20&message=  
+ Sat Apr 08 2017 01:30:12 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 20 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/todo-list-78110/releases { hosting: 
+   { public: 'dist',
+     rewrites: [ [Object] ],
+     version: '-KhAotx6S1METzfS45LH',
+     prefix: '-KhAotx6S1METzfS45LH/',
+     manifest: [] } } 
+ Sat Apr 08 2017 01:30:18 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/todo-list-78110/overview
+[info] Hosting URL: https://todo-list-78110.firebaseapp.com

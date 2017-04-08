@@ -12,18 +12,17 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
 
     $scope.addTodo = function addTodo() {
         var todo = {};
-        if ($scope.title) {
+        if ($scope.new_todo.$valid) {
             todo.id = Date.now() + '';
             todo.title = $scope.title;
             todo.date = new Date().toLocaleDateString('en-GB');
             todo.completed = false;
+            $scope.todos.push(todo);
+            $scope.title = null;
+            TodosFactory.add(todo).then(getTodos);
         } else {
-            alert('Título obrigatório');
+            return
         };
-
-        $scope.todos.push(todo);
-        $scope.title = '';
-        TodosFactory.add(todo).then(getTodos);
         $scope.new_todo.$setPristine();
         $scope.new_todo.$setUntouched();
     };
@@ -40,7 +39,9 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
     };
 
     $scope.removeCompleteds = function() {
-        TodosFactory.removeCompleteds().then(getTodos);
+        TodosFactory.removeCompleteds().then(function(todos) {
+            $scope.todos = todos;
+        });
     };
     $scope.listCompleteds = function() {
         getTodos();

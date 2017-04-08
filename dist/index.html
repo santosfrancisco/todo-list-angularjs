@@ -18,7 +18,7 @@
                 <img class="header" src="img/todo-logo.png" />
             </div>
             <div>
-                <md-switch ng-model="showCompleteds" ng-change="listCompleteds()" aria-label="">Show completeds?</md-switch>
+                <md-switch ng-model="this.showCompleteds" ng-change="listCompleteds()" aria-label="">Show completeds?</md-switch>
             </div>
 
             <add-todo-form></add-todo-form>
@@ -31,7 +31,7 @@
         </md-card-content>
     </md-card>
     <div class="on-center" layout="column">
-        <span><i class="fa fa-2x fa-github"></i></span>
+        <span><i class="fa fa-2x fa-github" aria-hidden="true"></i></span>
         <span class="love"><i class="fa fa-code" aria-hidden="true"></i> with <i class="fa fa-heart red" aria-hidden="true"></i> by <a href="http://github.com/yoshidf" target="_blank">Francisco</a></span>
     </div>
 
