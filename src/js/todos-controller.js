@@ -1,10 +1,10 @@
-angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', function($scope, TodosFactory) {
+angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', 'TodosFactoryV2', function($scope, TodosFactory, TodosFactoryV2) {
     $scope.todos = [];
     $scope.ready = false;
     $scope.showCompleteds = true;
 
     var getTodos = function getTodos() {
-        TodosFactory.list($scope.showCompleteds).then(function(todos) {
+        TodosFactoryV2.list($scope.showCompleteds).then(function(todos) {
             $scope.todos = todos;
             $scope.ready = true;
         });
@@ -19,7 +19,7 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
             todo.completed = false;
             $scope.todos.push(todo);
             $scope.title = null;
-            TodosFactory.add(todo).then(getTodos);
+            TodosFactoryV2.add(todo).then(getTodos);
         } else {
             return
         };
@@ -28,20 +28,19 @@ angular.module('app').controller('TodosController', ['$scope', 'TodosFactory', f
     };
 
     $scope.removeTodo = function(todo) {
-        TodosFactory.remove(todo.id);
+        // TodosFactory.remove(todo.id);
+        TodosFactoryV2.remove(todo);
         var idx = $scope.todos.indexOf(todo);
         $scope.todos.splice(idx, 1);
     };
 
     $scope.completeTodo = function(todo) {
-        TodosFactory.change(todo).then(
+        TodosFactoryV2.change(todo).then(
             getTodos);
     };
 
     $scope.removeCompleteds = function() {
-        TodosFactory.removeCompleteds().then(function(todos) {
-            $scope.todos = todos;
-        });
+        TodosFactoryV2.removeCompleteds().then(getTodos);
     };
     $scope.listCompleteds = function() {
         getTodos();

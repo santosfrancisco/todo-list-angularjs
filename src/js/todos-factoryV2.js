@@ -1,16 +1,18 @@
-angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http) {
-    // api host
-    var myApi = 'https://todo-list-78110.firebaseio.com';
+angular.module('app').factory('TodosFactoryV2', ['$http', '$q', function($http, $q) {
+    var myApi = "https://polar-forest-11830.herokuapp.com/api";
     return {
         list: function(showCompleteds) {
             var promessa = $q.defer();
 
-            $http.get(myApi + '/todos.json')
+            $http.get(myApi + '/todos')
                 .then(function(result) {
                     var todos = [];
                     angular.forEach(result.data, function(todo, id) {
                         todo.id = id;
                         var completed = todo.completed;
+                        // 	Converte a data usando configurações locais
+                        todo.date = new Date(todo.date).toLocaleDateString();
+
                         if (showCompleteds) {
                             todos.push(todo);
                         } else {
@@ -25,33 +27,39 @@ angular.module('app').factory('TodosFactory', ['$q', '$http', function($q, $http
             return promessa.promise;
         },
         add: function(todo) {
-            var id = todo.id;
-            delete todo.id;
-
-            return $http.put(myApi + '/todos/' + id + '.json', todo);
-        },
-        change: function(todo) {
-            var id = todo.id;
-            completed = !todo.completed;
-            return $http.put(myApi + '/todos/' + id + '/completed.json', completed);
+            var data = {
+                title: todo.title,
+                completed: false,
+                date: Date.now()
+            };
+            return $http.post(myApi + '/todos', data);
         },
         remove: function(todo) {
-            $http.delete(myApi + '/todos/' + todo.id + '.json');
+            return $http.delete(myApi + '/todos/' + todo._id);
+        },
+        change: function(todo) {
+            todo.completed != todo.completed;
+            var data = {
+                completed: !todo.completed,
+                title: todo.title
+            };
+            return $http.put(myApi + '/todos/' + todo._id, data);
         },
         removeCompleteds: function() {
 
-            $http.get(myApi + '/todos.json')
+            return $http.get(myApi + '/todos')
                 .then(function(result) {
                     var todos = [];
                     angular.forEach(result.data, function(todo, id) {
                         todo.id = id;
                         var completed = todo.completed;
+
                         if (completed) {
-                            $http.delete(myApi + '/todos/' + id + '.json');
+                            $http.delete(myApi + '/todos/' + todo._id);
                         }
                     });
                 });
 
         }
-    };
+    }
 }]);
