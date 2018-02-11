@@ -18,14 +18,14 @@
                 <img class="header" src="img/todo-logo.png" />
             </div>
             <div>
-                <md-switch ng-model="this.showCompleteds" ng-change="listCompleteds()" aria-label="">Show completeds?</md-switch>
+                <md-switch ng-model="this.showCompleteds" aria-label="">Show completeds?</md-switch>
             </div>
 
             <add-todo-form></add-todo-form>
             <loading ng-if="!ready"></loading>
             <list-todos ng-if="ready"></list-todos>
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="removeCompleteds()"><i class="fa fa-trash"></i> Remove completeds</md-button>
+                <md-button class="md-raised md-primary" ng-clickx="removeCompleteds()"><i class="fa fa-trash"></i> Remove completeds</md-button>
             </div>
 
         </md-card-content>
